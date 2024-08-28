@@ -1,4 +1,4 @@
-﻿namespace TasksManagement.Common.Behaviors;
+﻿namespace TasksManagement.API.Common.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse>
     (IEnumerable<IValidator<TRequest>> validators)

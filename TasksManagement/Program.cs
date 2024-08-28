@@ -1,23 +1,21 @@
-using TasksManagement.Common.Behaviors;
-using TasksManagement.Common.Exceptions.Handler;
+using Carter;
+using TasksManagement.API;
+using TasksManagement.API.Common.Exceptions.Handler;
+using TasksManagement.API.Common.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var assembly = typeof(Program).Assembly;
-builder.Services.AddMediatR(config =>
-{
-    config.RegisterServicesFromAssembly(assembly);
-    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
-    config.AddOpenBehavior(typeof(LoggingBehavior<,>));
-});
-builder.Services.AddValidatorsFromAssembly(assembly);
+builder.Services.ConfigureApiServices(builder.Configuration);
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.MapCarter();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,6 +28,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapSseHolder("/sse/connect");
 
 app.Run();

@@ -1,4 +1,4 @@
-﻿namespace TasksManagement.Common.Exceptions;
+﻿namespace TasksManagement.API.Common.Exceptions;
 
 public class InternalServerException : Exception
 {

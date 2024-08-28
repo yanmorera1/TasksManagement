@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace TasksManagement.Common.Behaviors;
+namespace TasksManagement.API.Common.Behaviors;
 
 public class LoggingBehavior<TRequest, TResponse>
     (ILogger<LoggingBehavior<TRequest, TResponse>> logger)
