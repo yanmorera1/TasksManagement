@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TasksManagement.Common.CQRS;
+namespace TasksManagement.API.Common.CQRS;
 
 public interface IQueryHandler<in TQuery, TResponse>
     : IRequestHandler<TQuery, TResponse>
