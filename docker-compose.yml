@@ -1,0 +1,10 @@
+services:
+
+  tasksdb:
+    image: mcr.microsoft.com/mssql/server
+
+  tasksmanagement.api:
+    image: ${DOCKER_REGISTRY-}tasksmanagementapi
+    build:
+      context: .
+      dockerfile: TasksManagement/Dockerfile

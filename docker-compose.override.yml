@@ -1,0 +1,24 @@
+services:
+
+  tasksdb:
+    container_name: tasksdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=TM12345678
+    restart: always
+    ports:
+      - "1433:1433"
+
+  tasksmanagement.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    depends_on:
+      - tasksdb
+    ports:
+      - "8080"
+      - "8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
